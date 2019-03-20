@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import TodoItem from './components/TodoItem';
+import Header from './components/Header';
+import Footer from './components/Footer'
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      todoItems: [
+        { title: 'Đi trả đồ án tốt nghiệp', isComplete: true },
+        { title: 'Đưa bạn gái đi ăn tối', isComplete: false }
+      ]
+    }
+  }
+  showTodoList = () => {
+    if (this.state.todoItems.length) {
+      return (
+        <div>
+          {
+            this.state.todoItems.map((item, index) => 
+            <TodoItem
+              key={index}
+              item={item} />
+            )
+          }
+          <Footer />
+        </div>
+      )
+    } else {
+      return
+    }
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div className="container">
+          <Header />
+          <div className="content">
+            <input type="text" name="txtname" placeholder="What need to be done ?" />
+            {this.showTodoList()}
+          </div>
+        </div>
       </div>
     );
   }
