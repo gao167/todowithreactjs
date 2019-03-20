@@ -1,13 +1,27 @@
 import React, { Component } from 'react'
-
+import checkImg from '../img/heart.svg'
+var classNames = require('classnames')
 class TodoItem extends Component {
-  render() {
-      const {item} = this.props
-    return (
-      <div onClick={() =>this.props.onClick(item)}>
-        <p className="todoitem">{item.title}</p>
-      </div>
-    )
-  }
+    checkImage(){
+        if(this.props.item.isComplete){
+            return <img src={checkImg} width={25}/>
+        }
+        else return
+    }
+    render() {
+        const { item } = this.props
+        var itemDone = classNames({
+            'todolist-complete': item.isComplete,
+            'todoitem': true
+        })
+        return (
+            <div className="itemlist">
+                <div onClick={() => this.props.onClick(item)} className="checkDone">
+                    {this.checkImage()}
+                </div>
+                <p className={itemDone}>{item.title}</p>
+            </div>
+        )
+    }
 }
-export default  TodoItem
+export default TodoItem

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import ArowCheck from '../src/img/arow.svg'
 import TodoItem from './components/TodoItem';
 import Header from './components/Header';
 import Footer from './components/Footer'
@@ -8,8 +9,8 @@ class App extends Component {
     super()
     this.state = {
       todoItems: [
-        { title: 'Đi trả đồ án tốt nghiệp', isComplete: true },
-        { title: 'Đưa bạn gái đi ăn tối', isComplete: false }
+        { title: 'Đi trả đồ án tốt nghiệp'},
+        { title: 'Đưa bạn gái đi ăn tối' }
       ]
     }
   }
@@ -50,14 +51,20 @@ class App extends Component {
       return
     }
   }
-
+  //checkall
+  checkAll() {
+    
+  }
   render() {
     return (
       <div className="App">
         <div className="container">
           <Header />
           <div className="content">
-            <input type="text" name="txtname" placeholder="What needs to be done ?" />
+            <div className="content-input">
+              <img src={ArowCheck} width={20} height={20} onClick={() => this.checkAll()} />
+              <input type="text" name="txtname" placeholder="What needs to be done ?" />
+            </div>
             {this.showTodoList()}
           </div>
         </div>
