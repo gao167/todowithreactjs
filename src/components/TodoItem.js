@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import checkImg from '../img/heart.svg'
+import iconDel from '../img/cross.svg'
 var classNames = require('classnames')
 class TodoItem extends Component {
     checkImage(){
@@ -20,6 +21,7 @@ class TodoItem extends Component {
                     {this.checkImage()}
                 </div>
                 <p className={itemDone}>{item.title}</p>
+                <img onClick={()=>this.props.deleteItem()} className="iconDelete" src={iconDel} alt={12} width={15} height={15}/>
             </div>
         )
     }

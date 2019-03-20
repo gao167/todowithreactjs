@@ -5,7 +5,7 @@ export default class Footer extends Component {
         return (
             <div className="footer">
                 <div className="footerleft">
-                    <p>2 items left</p>
+                    <p>{this.props.number} items left</p>
                 </div>
                 <div className="footerright">
                     <p>All</p>

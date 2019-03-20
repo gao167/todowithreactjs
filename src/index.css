@@ -69,15 +69,17 @@ body {
 }
 .itemlist{
   display: flex;
-  justify-content: flex-start
+  justify-content: flex-start;
+  border-bottom: 1px solid #ededed;
+  align-items: center;
 }
 .todoitem{
   font-size: 24px;
-  border-bottom: 1px solid #ededed;
   padding: 15px 15px 15px 0px;
   line-height: 1.2;
   margin: 0;
-  text-align: left
+  text-align: left;
+  flex-grow: 8;
 }
 .content-input{
   display: flex;
@@ -87,4 +89,13 @@ body {
 .content-input img {
   margin-left: 20px;
   opacity: 0.5;
+}
+.iconDelete{
+  flex-grow: 1;
+  display: none;
+  margin-right: 15px;
+}
+.itemlist:hover .iconDelete{
+  display: block;
+  cursor: pointer;
 }

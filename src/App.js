@@ -9,9 +9,10 @@ class App extends Component {
     super()
     this.state = {
       todoItems: [
-        { title: 'Đi trả đồ án tốt nghiệp'},
+        { title: 'Đi trả đồ án tốt nghiệp' },
         { title: 'Đưa bạn gái đi ăn tối' }
-      ]
+      ],
+      valueDefault: ''
     }
   }
   //event click a item
@@ -41,10 +42,11 @@ class App extends Component {
               <TodoItem
                 key={index}
                 item={item}
-                onClick={() => this.clickItem(item)} />
+                onClick={() => this.clickItem(item)}
+                deleteItem={()=>this.deleteItem(item)} />
             )
           }
-          <Footer />
+          <Footer number={this.state.todoItems.length}/>
         </div>
       )
     } else {
@@ -53,9 +55,43 @@ class App extends Component {
   }
   //checkall
   checkAll() {
-    const {todoItems} = this.state
+    const { todoItems } = this.state
     this.setState({
-      todoItems:todoItems.map((item)=> {return {...item,isComplete:!item.isComplete}})
+      todoItems: todoItems.map((item) => { return { ...item, isComplete: !item.isComplete } })
+    })
+  }
+  //add new item
+  onKeyUp(event) {
+    let text = event.target.value
+    if (event.keyCode === 13) {
+      if (!text) { return }
+      text = text.trim()
+      if (!text) { return }
+      this.setState({
+        valueDefault: '',
+        todoItems: [
+          { title: text, isComplete: false },
+          ...this.state.todoItems
+        ]
+      })
+    }
+  }
+  //change input value
+  onChange(event) {
+    let textChange = event.target.value
+    this.setState({
+      valueDefault: textChange
+    })
+  }
+  //delete item
+  deleteItem(item){
+    const { todoItems } = this.state
+    const index = todoItems.indexOf(item)
+    this.setState({
+      todoItems: [
+        ...todoItems.slice(0, index),
+        ...todoItems.slice(index + 1)
+      ]
     })
   }
   render() {
@@ -66,7 +102,7 @@ class App extends Component {
           <div className="content">
             <div className="content-input">
               <img src={ArowCheck} alt={'check'} width={20} height={20} onClick={() => this.checkAll()} />
-              <input type="text" name="txtname" placeholder="What needs to be done ?" />
+              <input value={this.state.valueDefault} onChange={(event) => this.onChange(event)} onKeyUp={(event) => this.onKeyUp(event)} type="text" name="txtname" placeholder="What needs to be done ?" />
             </div>
             {this.showTodoList()}
           </div>
