@@ -7,10 +7,13 @@ export default class Footer extends Component {
                 <div className="footerleft">
                     <p>{this.props.number} items left</p>
                 </div>
-                <div className="footerright">
-                    <p>All</p>
+                <div className="footermid">
+                    <p className="active">All</p>
                     <p>Active</p>
                     <p>Completed</p>
+                </div>
+                <div className="footerright">
+                    <p>Clear completed</p>
                 </div>
             </div>
         )
