@@ -4,7 +4,7 @@ class TodoItem extends Component {
   render() {
       const {item} = this.props
     return (
-      <div>
+      <div onClick={() =>this.props.onClick(item)}>
         <p className="todoitem">{item.title}</p>
       </div>
     )

@@ -13,15 +13,34 @@ class App extends Component {
       ]
     }
   }
-  showTodoList = () => {
+  //event click a item
+  clickItem(item) {
+    const isComplete = item.isComplete
+    const { todoItems } = this.state
+    const index = todoItems.indexOf(item)
+    this.setState({
+      todoItems: [
+        ...todoItems.slice(0, index),
+        {
+          ...item,
+          isComplete: !isComplete
+        },
+        ...todoItems.slice(index + 1)
+      ]
+    })
+  }
+
+  //show data for app
+  showTodoList() {
     if (this.state.todoItems.length) {
       return (
         <div>
           {
-            this.state.todoItems.map((item, index) => 
-            <TodoItem
-              key={index}
-              item={item} />
+            this.state.todoItems.map((item, index) =>
+              <TodoItem
+                key={index}
+                item={item}
+                onClick={() => this.clickItem(item)} />
             )
           }
           <Footer />
@@ -31,13 +50,14 @@ class App extends Component {
       return
     }
   }
+
   render() {
     return (
       <div className="App">
         <div className="container">
           <Header />
           <div className="content">
-            <input type="text" name="txtname" placeholder="What need to be done ?" />
+            <input type="text" name="txtname" placeholder="What needs to be done ?" />
             {this.showTodoList()}
           </div>
         </div>
