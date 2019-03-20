@@ -53,7 +53,10 @@ class App extends Component {
   }
   //checkall
   checkAll() {
-    
+    const {todoItems} = this.state
+    this.setState({
+      todoItems:todoItems.map((item)=> {return {...item,isComplete:!item.isComplete}})
+    })
   }
   render() {
     return (
@@ -62,7 +65,7 @@ class App extends Component {
           <Header />
           <div className="content">
             <div className="content-input">
-              <img src={ArowCheck} width={20} height={20} onClick={() => this.checkAll()} />
+              <img src={ArowCheck} alt={'check'} width={20} height={20} onClick={() => this.checkAll()} />
               <input type="text" name="txtname" placeholder="What needs to be done ?" />
             </div>
             {this.showTodoList()}

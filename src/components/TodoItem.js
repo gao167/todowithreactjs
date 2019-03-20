@@ -4,7 +4,7 @@ var classNames = require('classnames')
 class TodoItem extends Component {
     checkImage(){
         if(this.props.item.isComplete){
-            return <img src={checkImg} width={25}/>
+            return <img alt={'check'} src={checkImg} width={25}/>
         }
         else return
     }
